@@ -28,13 +28,13 @@ jobs:
           git status
           git add README.md
           git commit -m 'Updated README.md' 
-          git checkout -b temp
           echo ---
+          git checkout -b temp
           git branch -a
           echo ---
-          git checkout test
-          git rebase temp origin/test
-          
+          git checkout -b test --track origin/test
+          git rebase temp test
+          git status
           echo ---
           git branch -a
           echo ---
