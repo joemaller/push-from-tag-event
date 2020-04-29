@@ -14,7 +14,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Modify Readme
-        run: echo $(date) >> README.md
+        run: | 
+          echo $(date) >> README.md
+          cat README.md
 
       - name: Git commit, rebase onto master
         run: |
@@ -23,10 +25,12 @@ jobs:
           git branch -a
           git remote show origin
           git fetch origin
+          git branch -a
           git add README.md
           git commit -m 'Updated README.md' 
           git rebase HEAD origin/test
-          git push origin origin/test
+          git branch -a
+          git push origin test
           
         
 
