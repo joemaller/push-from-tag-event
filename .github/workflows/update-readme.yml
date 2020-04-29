@@ -28,6 +28,7 @@ jobs:
       #     git remote show origin
       #     git fetch origin
       #     git branch -a
+          git status
           git add README.md
           git commit -m 'Updated README.md' 
       #     git rebase HEAD remotes/origin/test
