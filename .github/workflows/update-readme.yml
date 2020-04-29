@@ -12,32 +12,36 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        run: |
+          git fetch origin
 
       - name: Modify Readme
         run: | 
           echo $(date) >> README.md
           cat README.md
 
-      - name: Git commit, rebase onto master
-        run: |
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git config --local user.name "$GITHUB_ACTOR"
-          git branch -a
-          git remote show origin
-          git fetch origin
-          git branch -a
-          git add README.md
-          git commit -m 'Updated README.md' 
-          git rebase HEAD remotes/origin/test
-          git branch -a
+      # - name: Git commit, rebase onto master
+      #   run: |
+      #     git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      #     git config --local user.name "$GITHUB_ACTOR"
+      #     git branch -a
+      #     git remote show origin
+      #     git fetch origin
+      #     git branch -a
+      #     git add README.md
+      #     git commit -m 'Updated README.md' 
+      #     git rebase HEAD remotes/origin/test
+      #     git branch -a
     
     # git push origin test
           
-        
+      - name: Git rebase to master
+        run: |
+          git rebase HEAD test
 
 
-      # - name: Commit Changelog
-      #   uses: stefanzweifel/git-auto-commit-action@v4.1.6
-      #   with:
-      #     commit_message: Update README
-      #     file_pattern: README.md
+      - name: Commit Changelog
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: Update README
+          file_pattern: README.md
