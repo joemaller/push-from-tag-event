@@ -29,10 +29,9 @@ jobs:
           git add README.md
           git commit -m 'Updated README.md' 
           git branch -a
-          git rebase HEAD remotes/origin/test
-          git checkout test
+          git rebase HEAD test
           git status
-          git log
+          git log -n4
     
     # git push origin test
           
