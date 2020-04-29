@@ -37,8 +37,8 @@ jobs:
           git status
           echo ---
           git branch -a
-          echo ---
-          git status
+          echo ---  
+          git push
           git log -n4
     
     # git push origin test
