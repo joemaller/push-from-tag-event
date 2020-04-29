@@ -26,7 +26,7 @@ jobs:
           git add README.md
           git commit -m 'Updated README.md' 
           git rebase HEAD origin/test
-          git push origin test
+          git push origin origin/test
           
         
 
