@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-        run: |
-          git fetch origin
+      - uses: actions/checkout@v2  
+        with:
+          fetch-depth: 0
 
       - name: Modify Readme
         run: | 
@@ -35,13 +35,14 @@ jobs:
     
     # git push origin test
           
-      - name: Git rebase to master
-        run: |
-          git rebase HEAD test
+      # - name: Git rebase to master
+      #   run: |
+      #     git rebase HEAD test
 
 
       - name: Commit Changelog
         uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           commit_message: Update README
+          branch: test
           file_pattern: README.md
