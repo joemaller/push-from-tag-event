@@ -1,0 +1,20 @@
+{
+  "name": "push-from-tag-event",
+  "version": "1.0.0",
+  "description": "Trying to isolate a bug pushing from a tag event in GitHub actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joemaller/push-from-tag-event.git"
+  },
+  "keywords": [],
+  "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joemaller/push-from-tag-event/issues"
+  },
+  "homepage": "https://github.com/joemaller/push-from-tag-event#readme"
+}
