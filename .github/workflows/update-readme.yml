@@ -32,6 +32,7 @@ jobs:
           git rebase HEAD remotes/origin/test
           git checkout test
           git status
+          git log
     
     # git push origin test
           
