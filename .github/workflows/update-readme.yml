@@ -28,6 +28,7 @@ jobs:
           git status
           git add README.md
           git commit -m 'Updated README.md' 
+          git checkout -b temp
           echo ---
           git branch -a
           echo ---
