@@ -25,7 +25,6 @@ jobs:
           git checkout -b temp
           git add README.md
           git commit -m 'Updated README.md' 
-          git fetch
           git checkout -b test --track origin/test
           git rebase temp test
           git status
