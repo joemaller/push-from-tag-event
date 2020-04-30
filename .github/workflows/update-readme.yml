@@ -25,14 +25,13 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
           git checkout -b temp
-          git fetch
           git add README.md
           git commit -m 'Updated README.md' 
           git checkout -b test --track origin/test
           git rebase temp test
           git push
     
-          
+
       # v1.0.24 worked
 
 
