@@ -11,10 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2  
+      - uses: actions/checkout@v2
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Modify Readme
-        run: | 
+        run: |
           echo $(date) >> README.md
           cat README.md
 
@@ -25,25 +30,19 @@ jobs:
           git checkout -b temp
           git add README.md
           git commit -m 'Updated README.md' 
-          git checkout -b test --track remotes/origin/test
+          git fetch
+          git checkout -b test --track origin/test
           git rebase temp test
           git status
           git push
-    
-          
       # v1.0.24 worked
-
-
     # git push origin test
-          
-      # - name: Git rebase to master
-      #   run: |
-      #     git rebase HEAD test
-
-
-      # - name: Commit Changelog
-      #   uses: stefanzweifel/git-auto-commit-action@v4.1.6
-      #   with:
-      #     commit_message: Update README
-      #     branch: test
-      #     file_pattern: README.md
+    # - name: Git rebase to master
+    #   run: |
+    #     git rebase HEAD test
+    # - name: Commit Changelog
+    #   uses: stefanzweifel/git-auto-commit-action@v4.1.6
+    #   with:
+    #     commit_message: Update README
+    #     branch: test
+    #     file_pattern: README.md
