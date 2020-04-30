@@ -27,10 +27,14 @@ jobs:
           git add README.md
           git commit -m 'Updated README.md' 
           git fetch
-          git checkout -b test --track origin/test
+          git checkout -b test
           git rebase $BRANCH_NAME test
           git push
       
+
+
+         #          git checkout -b test --track origin/test
+ 
         # v1.0.24 worked
     # git push origin test
     # - name: Git rebase to master
