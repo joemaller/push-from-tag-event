@@ -1,6 +1,6 @@
 {
   "name": "push-from-tag-event",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "Trying to isolate a bug pushing from a tag event in GitHub actions",
   "main": "index.js",
   "scripts": {
