@@ -13,15 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Modify Readme
-        run: |
-          echo $(date) >> README.md
-          cat README.md
+        run: echo $(date) >> README.md
 
       - name: Git commit, rebase onto master
         env:
@@ -30,15 +23,15 @@ jobs:
           echo $BRANCH_NAME
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
-          git checkout -b temp
+          git checkout -b $BRANCH_NAME
           git add README.md
           git commit -m 'Updated README.md' 
           git fetch
           git checkout -b test --track origin/test
-          git rebase temp test
-          git status
+          git rebase $BRANCH_NAME test
           git push
-      # v1.0.24 worked
+      
+        # v1.0.24 worked
     # git push origin test
     # - name: Git rebase to master
     #   run: |
