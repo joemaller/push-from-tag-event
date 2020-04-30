@@ -24,7 +24,10 @@ jobs:
           cat README.md
 
       - name: Git commit, rebase onto master
+        env:
+            BRANCH_NAME: ${{ github.repository }}${{ github.run_id}}
         run: |
+          echo $BRANCH_NAME
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
           git checkout -b temp
