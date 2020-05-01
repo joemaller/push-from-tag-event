@@ -13,7 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-            fetch_depth: 0
+            ref: test
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
 
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
@@ -28,6 +34,7 @@ jobs:
           git checkout -b $TMP_BRANCH
           git add README.md
           git commit -m 'Updated README.md' 
+          git fetch
           git checkout -b $PUSH_BRANCH --track origin/${PUSH_BRANCH}
           git rebase $TMP_BRANCH $PUSH_BRANCH
           git push
