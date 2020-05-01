@@ -6,9 +6,6 @@ on:
   push:
     tags: ["v*"]
 
-env:
-  PUSH_BRANCH: test
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,14 +31,32 @@ jobs:
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
 
+
       - name: Git commit, rebase onto master
+        env:
+          PUSH_BRANCH: test
+          TMP_BRANCH: ${{ github.repository }}${{ github.run_id}}
         run: |
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
+          git checkout -b $TMP_BRANCH
           git add README.md
           git commit -m 'Updated README.md' 
-          git rebase HEAD $PUSH_BRANCH
+          git fetch
+          git checkout -b $PUSH_BRANCH --track origin/${PUSH_BRANCH}
+          git rebase $TMP_BRANCH $PUSH_BRANCH
           git push
+
+
+#  Note: This checks outther head of the remote branch, not the tag
+      # - name: Git commit, rebase onto master
+      #   run: |
+      #     git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      #     git config --local user.name "$GITHUB_ACTOR"
+      #     git add README.md
+      #     git commit -m 'Updated README.md' 
+      #     git rebase HEAD $PUSH_BRANCH
+      #     git push
 
 # a couple notes:
 #   `git fetch` is essential, as is the explicit track flag on the second checkout.
