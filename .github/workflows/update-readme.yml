@@ -13,20 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: |
-          git status
-          git log
-          
-
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ env.PUSH_BRANCH }}
-
-      - run: |
-          git status
-          git log
-          git symbolic-ref HEAD
-          git show-ref --heads
 
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
@@ -48,7 +34,7 @@ jobs:
           git push
 
 
-#  Note: This checks outther head of the remote branch, not the tag
+#  Note: This checks out the head of the remote branch, not the tag
       # - name: Git commit, rebase onto master
       #   run: |
       #     git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
