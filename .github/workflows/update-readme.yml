@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: test
+          ref: ${{ env.PUSH_BRANCH }}
 
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
