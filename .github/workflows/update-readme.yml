@@ -19,8 +19,8 @@ jobs:
           ref: test
 
       - run: |
-        echo $PUSH_BRANCH
-        echo  ${{ env.PUSH_BRANCH }}
+          echo $PUSH_BRANCH
+          echo  ${{ env.PUSH_BRANCH }}
       
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
