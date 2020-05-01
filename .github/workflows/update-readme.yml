@@ -16,14 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: git show-ref --heads
+      - run: |
+          git status
+          git log
 
       - uses: actions/checkout@v2
         with:
           ref: ${{ env.PUSH_BRANCH }}
-      
-      - run: git symbolic-ref HEAD
-      - run: git show-ref --heads
+
+      - run: |
+          git status
+          git log
+          git symbolic-ref HEAD
+          git show-ref --heads
 
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
