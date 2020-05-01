@@ -18,31 +18,35 @@ jobs:
 
       - name: Git commit, rebase onto master
         env:
-            BRANCH_NAME: ${{ github.repository }}${{ github.run_id}}
+          PUSH_BRANCH: test
+          TMP_BRANCH: ${{ github.repository }}${{ github.run_id}}
         run: |
-          echo $BRANCH_NAME
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR"
-          git checkout -b $BRANCH_NAME
+          git checkout -b $TMP_BRANCH
           git add README.md
           git commit -m 'Updated README.md' 
           git fetch
-          git checkout -b test
-          git rebase $BRANCH_NAME test
+          git checkout -b $PUSH_BRANCH --track origin/test${PUSH_BRANCH}
+          git rebase $TMP_BRANCH $PUSH_BRANCH
           git push
-      
 
+# a couple notes:
+#   `git fetch` is essential, as is the explicit track flag on the second checkout.
+#   I feel like this could bne more terse, but it works, is easy to understancd
+#   and already ate a day, so I'm stopping for now. Maybe someone else will see an
+#   obvious optimization I missed
 
-         #          git checkout -b test --track origin/test
- 
-        # v1.0.24 worked
-    # git push origin test
-    # - name: Git rebase to master
-    #   run: |
-    #     git rebase HEAD test
-    # - name: Commit Changelog
-    #   uses: stefanzweifel/git-auto-commit-action@v4.1.6
-    #   with:
-    #     commit_message: Update README
-    #     branch: test
-    #     file_pattern: README.md
+#          git checkout -b test --track origin/test
+
+# v1.0.24 worked
+# git push origin test
+# - name: Git rebase to master
+#   run: |
+#     git rebase HEAD test
+# - name: Commit Changelog
+#   uses: stefanzweifel/git-auto-commit-action@v4.1.6
+#   with:
+#     commit_message: Update README
+#     branch: test
+#     file_pattern: README.md
