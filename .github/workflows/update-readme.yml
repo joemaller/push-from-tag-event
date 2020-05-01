@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+            fetch_depth: 0
 
       - name: Modify Readme
         run: echo "$(date)  " >> README.md
